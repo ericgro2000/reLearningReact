@@ -1,27 +1,32 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 
-class ClassCounter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      count: 0,
-    };
-    this.increment = this.increment.bind(this);
-    this.decrement = this.decrement.bind(this);
-  }
+interface State {
+  count: number;
+}
 
-  increment() {
-    this.setState({ count: this.state.count + 1 });
-  }
+class ClassCounter extends Component<{}, State> {
+  state: State = {
+    count: 0,
+  };
 
-  decrement() {
-    this.setState({ count: this.state.count - 1 });
-  }
+  increment = () => {
+    this.setState((prevState) => ({
+      count: prevState.count + 1,
+    }));
+  };
+
+  decrement = () => {
+    this.setState((prevState) => ({
+      count: prevState.count - 1,
+    }));
+  };
 
   render() {
+    const { count } = this.state;
+
     return (
       <div>
-        <h1>Count:{this.state.count}</h1>
+        <h1>Count: {count}</h1>
         <button onClick={this.increment}>Increment</button>
         <button onClick={this.decrement}>Decrement</button>
       </div>
