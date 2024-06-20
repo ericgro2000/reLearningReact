@@ -2,12 +2,22 @@ import { useState } from "react";
 import MyInput from "./UI/Input/MyInput";
 import MyButton from "./UI/Button/MyButton";
 
-const PostForm = ({ create }) => {
-  const [post, setPost] = useState({ title: "", body: "" });
+export interface Post {
+  id?: number;
+  title: string;
+  body: string;
+}
 
-  const addNewPost = (e) => {
+interface PostFormProps {
+  create: (post: Post) => void;
+}
+
+const PostForm: React.FC<PostFormProps> = ({ create }) => {
+  const [post, setPost] = useState<Post>({ title: "", body: "" });
+
+  const addNewPost = (e: React.FormEvent) => {
     e.preventDefault();
-    const newPost = {
+    const newPost: Post = {
       ...post,
       id: Date.now(),
     };
@@ -17,17 +27,19 @@ const PostForm = ({ create }) => {
 
   return (
     <form>
-      {/*Управляемый компонент*/}
       <MyInput
         value={post.title}
-        onChange={(e) => setPost({ ...post, title: e.target.value })}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setPost({ ...post, title: e.target.value })
+        }
         type="text"
         placeholder="Название поста"
       />
-      {/*Неуправляемый\Неконтролируемый компонент*/}
       <MyInput
         value={post.body}
-        onChange={(e) => setPost({ ...post, body: e.target.value })}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setPost({ ...post, body: e.target.value })
+        }
         type="text"
         placeholder="Описание поста"
       />

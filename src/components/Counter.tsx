@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-function Counter() {
-  const [count, setCount] = useState(0);
+const Counter: React.FC = () => {
+  const [count, setCount] = useState<number>(0);
 
   return (
     <div>
@@ -10,6 +10,6 @@ function Counter() {
       <button onClick={() => setCount(count - 1)}>Decrement</button>
     </div>
   );
-}
+};
 
 export default Counter;

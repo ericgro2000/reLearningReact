@@ -1,6 +1,8 @@
 import classes from "./MyInput.module.css";
 
-const MyInput = (props) => {
+interface MyInputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+
+const MyInput: React.FC<MyInputProps> = (props) => {
   return <input className={classes.myInput} {...props} />;
 };
 
