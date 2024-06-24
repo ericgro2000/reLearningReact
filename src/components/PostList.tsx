@@ -1,5 +1,5 @@
 import Post from "./Post";
-import { Post as PostType } from "./PostForm";
+import { Post as PostType } from "../App";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 interface PostListProps {

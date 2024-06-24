@@ -1,12 +1,7 @@
 import { useState } from "react";
 import MyInput from "./UI/Input/MyInput";
 import MyButton from "./UI/Button/MyButton";
-
-export interface Post {
-  id?: number;
-  title: string;
-  body: string;
-}
+import { Post } from "./components/Post";
 
 interface PostFormProps {
   create: (post: Post) => void;
