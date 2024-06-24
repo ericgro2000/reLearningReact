@@ -24,7 +24,7 @@ const PostFilter: React.FC<PostFilterProps> = ({ filter, setFilter }) => {
         onChange={(selectedSort) =>
           setFilter({ ...filter, sort: selectedSort })
         }
-        defaultValue="Сортировка"
+        defaultValue="Alphabet sort by:"
         options={[
           { value: "title", name: "По названию" },
           { value: "body", name: "По описанию" },
