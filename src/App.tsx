@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useEffect } from "react";
 import Counter from "./components/Counter";
 import ClassCounter from "./components/ClassCounter";
 import Post from "./components/Post";
@@ -9,9 +9,10 @@ import PostFilter from "./components/PostFilter";
 import MyModal from "./components/UI/Modal/MyModal";
 import MyButton from "./components/UI/Button/MyButton";
 import { usePosts } from "./hooks/usePost";
-import { M } from "vite/dist/node/types.d-aGj9QkWt";
+import PostService from "./API/PostService";
 
 export interface Post {
+  userId?: number
   id?: number;
   title: string;
   body: string;
@@ -29,6 +30,20 @@ function App() {
   const [modal, setModal] = useState(false);
 
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+
+  const [isPostLoading, setIsPostsLoading] = useState(false);
+
+  async function fetchPosts() {
+    setIsPostsLoading(true);
+    const response = await PostService.getAll();
+    if (response) {
+      const fetchedPosts: Post[] = response.data;
+      setPosts(fetchedPosts);
+    }
+    setIsPostsLoading(false);
+  }
+    
+  useEffect(()=>{fetchPosts()},[])
 
   const createPost = (newPost: Post) => {
     setPosts([...posts, newPost]);
@@ -49,11 +64,11 @@ function App() {
       </MyModal>
       <hr style={{ margin: "15px 0" }} />
       <PostFilter filter={filter} setFilter={setFilter} />
-      <PostList
+      {isPostLoading?<h1 style={{ textAlign: "center" }}>Lädt...</h1>:<PostList
         remove={removePost}
         posts={sortedAndSearchedPosts}
         title="Посты про ЈЅ"
-      />
+      />}
     </div>
   );
 }
