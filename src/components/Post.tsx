@@ -1,12 +1,10 @@
 import MyButton from "./UI/Button/MyButton";
+import { Post as PostType } from "../App";
 
 interface PostProps {
   number: number;
-  post: {
-    title: string;
-    body: string;
-  };
-  remove: (post: { title: string; body: string }) => void;
+  post:PostType
+  remove: (post: { id:number,title: string; body: string }) => void;
 }
 
 const Post: React.FC<PostProps> = (props) => {

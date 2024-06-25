@@ -1,14 +1,14 @@
 import { useState } from "react";
 import MyInput from "./UI/Input/MyInput";
 import MyButton from "./UI/Button/MyButton";
-import { Post } from "./components/Post";
+import { Post } from "../App";
 
 interface PostFormProps {
   create: (post: Post) => void;
 }
 
 const PostForm: React.FC<PostFormProps> = ({ create }) => {
-  const [post, setPost] = useState<Post>({ title: "", body: "" });
+  const [post, setPost] = useState({ title: "", body: "" });
 
   const addNewPost = (e: React.FormEvent) => {
     e.preventDefault();
