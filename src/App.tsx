@@ -17,7 +17,7 @@ export interface Post {
 }
 
 function App() {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<Post[]>([{id:1,title:"smth",body:"++"}]);
 
   const [filter, setFilter] = useState({ sort: "", query: "" });
 

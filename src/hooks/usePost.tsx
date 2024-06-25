@@ -4,7 +4,20 @@ import { Post as PostType } from "../App";
 export const useSortedPosts = (posts: PostType[], sort: string | null) => {
   const sortedPosts = useMemo(() => {
     if (sort) {
-      return [...posts].sort((a, b) => a[sort]!.localeCompare(b[sort]!));
+      return [...posts].sort((a, b) => {
+        const propA = a[sort as keyof PostType];
+        const propB = b[sort as keyof PostType];
+
+        if (typeof propA === 'string' && typeof propB === 'string') {
+          return propA.localeCompare(propB);
+        }
+
+        if (typeof propA === 'number' && typeof propB === 'number') {
+          return propA - propB;
+        }
+
+        return 0;
+      });
     }
     return posts;
   }, [sort, posts]);
