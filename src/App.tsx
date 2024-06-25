@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import Counter from "./components/Counter";
-import ClassCounter from "./components/ClassCounter";
 import Post from "./components/Post";
 import "./styles/App.css";
 import PostForm from "./components/PostForm";
@@ -13,17 +11,13 @@ import PostService from "./API/PostService";
 
 export interface Post {
   userId?: number
-  id?: number;
+  id: number;
   title: string;
   body: string;
 }
 
 function App() {
-  const [posts, setPosts] = useState<Post[]>([
-    { id: 1, title: "Javascript", body: "use ts instead" },
-    { id: 2, title: "Python", body: "its a snake" },
-    { id: 3, title: "godot", body: "best engine" },
-  ]);
+  const [posts, setPosts] = useState<Post[]>([]);
 
   const [filter, setFilter] = useState({ sort: "", query: "" });
 
