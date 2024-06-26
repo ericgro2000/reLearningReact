@@ -8,6 +8,7 @@ import MyModal from "./components/UI/Modal/MyModal";
 import MyButton from "./components/UI/Button/MyButton";
 import { usePosts } from "./hooks/usePost";
 import PostService from "./API/PostService";
+import Loader from "./components/UI/Loader/MyLoader";
 
 export interface Post {
   userId?: number
@@ -58,7 +59,7 @@ function App() {
       </MyModal>
       <hr style={{ margin: "15px 0" }} />
       <PostFilter filter={filter} setFilter={setFilter} />
-      {isPostLoading?<h1 style={{ textAlign: "center" }}>Lädt...</h1>:<PostList
+      {isPostLoading?<div style={{display: 'flex', justifyContent: 'center', marginTop: 50}}><Loader/></div>:<PostList
         remove={removePost}
         posts={sortedAndSearchedPosts}
         title="Посты про ЈЅ"
