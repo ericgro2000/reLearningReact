@@ -1,13 +1,18 @@
 import { useState } from "react";
 
-export const useFetching = (callback: () => Promise<void>) => {
+interface Args {
+    limit:number
+    page:number
+}
+
+export const useFetching = (callback: (limit: number, page: number) => Promise<void>) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string>(''); 
 
-    const fetching = async () => {
+    const fetching = async(limit: number, page: number) => {
         try {
             setIsLoading(true);
-            await callback();
+            await callback(limit, page);
         } catch (e: unknown) { 
             if (typeof e === 'string') {
                 setError(e);
