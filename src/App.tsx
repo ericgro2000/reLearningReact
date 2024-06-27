@@ -58,7 +58,7 @@ function App() {
   const removePost = (post: Post) => {
     setPosts(posts.filter((p) => p.id !== post.id));
   };
-  const changePage = (page) => {
+  const changePage = (page:number) => {
     setPage(page)
 }
 

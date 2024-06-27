@@ -1,11 +1,7 @@
 import { useState } from "react";
 
-interface Args {
-    limit:number
-    page:number
-}
-
 export const useFetching = (callback: (limit: number, page: number) => Promise<void>) => {
+    
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string>(''); 
 
