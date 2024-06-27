@@ -1,5 +1,5 @@
 import React from 'react';
-import { getPagesArray } from "../../../utils/pages";
+import { usePagination } from '../../../hooks/usePagination';
 
 interface PaginationProps {
   totalPages: number;
@@ -8,7 +8,7 @@ interface PaginationProps {
 }
 
 const Pagination: React.FC<PaginationProps> = ({ totalPages, page, changePage }) => {
-  let pagesArray = getPagesArray(totalPages);
+  const pagesArray = usePagination(totalPages);
   return (
     <div className="page__wrapper">
       {pagesArray.map(p =>
