@@ -10,7 +10,7 @@ interface PostListProps {
 
 const PostList: React.FC<PostListProps> = ({ posts, title, remove }) => {
   if (!posts.length) {
-    return <h1 style={{ textAlign: "center" }}>Посты не найдены!</h1>;
+    return <h1 style={{ textAlign: "center" }}>Keine Einträge gefunden.</h1>;
   }
 
   return (
