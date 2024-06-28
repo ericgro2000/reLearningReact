@@ -1,5 +1,5 @@
 import MyButton from "./UI/Button/MyButton";
-import { Post as PostType } from "../App";
+import { Post as PostType } from "../pages/Posts";
 
 interface PostProps {
   number: number;
