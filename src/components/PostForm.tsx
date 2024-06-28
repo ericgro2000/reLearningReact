@@ -1,7 +1,7 @@
 import { useState } from "react";
 import MyInput from "./UI/Input/MyInput";
 import MyButton from "./UI/Button/MyButton";
-import { Post } from "../App";
+import { Post } from "../pages/Posts";
 
 interface PostFormProps {
   create: (post: Post) => void;
@@ -28,7 +28,7 @@ const PostForm: React.FC<PostFormProps> = ({ create }) => {
           setPost({ ...post, title: e.target.value })
         }
         type="text"
-        placeholder="Название поста"
+        placeholder="Titel des Beitrags"
       />
       <MyInput
         value={post.body}
@@ -36,9 +36,9 @@ const PostForm: React.FC<PostFormProps> = ({ create }) => {
           setPost({ ...post, body: e.target.value })
         }
         type="text"
-        placeholder="Описание поста"
+        placeholder="Posten Beschreibung"
       />
-      <MyButton onClick={addNewPost}>Создать пост</MyButton>
+      <MyButton onClick={addNewPost}>Einen Beitrag erstellen</MyButton>
     </form>
   );
 };

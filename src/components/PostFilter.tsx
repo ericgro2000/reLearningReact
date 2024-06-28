@@ -17,17 +17,17 @@ const PostFilter: React.FC<PostFilterProps> = ({ filter, setFilter }) => {
       <MyInput
         value={filter.query}
         onChange={(e) => setFilter({ ...filter, query: e.target.value })}
-        placeholder="Поиск..."
+        placeholder="Suche..."
       />
       <MySelect
         value={filter.sort}
         onChange={(selectedSort) =>
           setFilter({ ...filter, sort: selectedSort })
         }
-        defaultValue="Alphabet sort by:"
+        defaultValue="Alphabetisch sortieren nach:"
         options={[
-          { value: "title", name: "По названию" },
-          { value: "body", name: "По описанию" },
+          { value: "title", name: "Titel" },
+          { value: "body", name: "Beschreibung" },
         ]}
       />
     </div>
