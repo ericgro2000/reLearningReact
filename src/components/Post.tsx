@@ -1,5 +1,6 @@
 import MyButton from "./UI/Button/MyButton";
 import { Post as PostType } from "../pages/Posts";
+import { useNavigate } from "react-router-dom";
 
 interface PostProps {
   number: number;
@@ -7,17 +8,32 @@ interface PostProps {
   remove: (post: { id:number,title: string; body: string }) => void;
 }
 
-const Post: React.FC<PostProps> = (props) => {
+const Post: React.FC<PostProps> = ({ post, remove }) => {
+  const navigate = useNavigate();
+
+  const handleOpenPost = () => {
+    navigate(`/posts/${post.id}`);
+  };
+
+  const handleRemovePost = () => {
+    remove(post);
+  };
+
   return (
     <div className="post">
       <div className="post__content">
-        <strong>
-          {props.post.id}. {props.post.title}
-        </strong>
-        <div>{props.post.body}</div>
+        <strong>{post.id}. {post.title}</strong>
+        <div>
+          {post.body}
+        </div>
       </div>
       <div className="post__btns">
-        <MyButton onClick={() => props.remove(props.post)}>Удалить</MyButton>
+        <MyButton onClick={handleOpenPost}>
+          Открыть
+        </MyButton>
+        <MyButton onClick={handleRemovePost}>
+          Удалить
+        </MyButton>
       </div>
     </div>
   );
