@@ -29,10 +29,10 @@ const Post: React.FC<PostProps> = ({ post, remove }) => {
       </div>
       <div className="post__btns">
         <MyButton onClick={handleOpenPost}>
-          Открыть
+          Öffnen
         </MyButton>
         <MyButton onClick={handleRemovePost}>
-          Удалить
+          Löschen
         </MyButton>
       </div>
     </div>
