@@ -3,6 +3,7 @@ import About from "../pages/About";
 import Posts from "../pages/Posts";
 import PostIdPage from "../pages/PostIdPage";
 import ErrorPage from "../pages/ErrorPage";
+import Login from "../pages/Login";
 
 interface Route {
   path: string;
@@ -16,3 +17,9 @@ export const privateRoutes: Route[] = [
   { path: '/about', component: About  },
   { path: '*', component: ErrorPage  },
 ];
+
+export const publicRoutes = [
+  { path: "/", component: Login},
+  {path: '/login', component: Login},
+  { path: '*', component: Login  },
+]
