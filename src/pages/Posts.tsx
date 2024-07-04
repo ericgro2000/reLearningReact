@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Post from "../components/Post";
 import PostForm from "../components/PostForm";
 import PostList from "../components/PostList";
@@ -11,6 +11,7 @@ import Loader from "../components/UI/Loader/MyLoader";
 import { useFetching } from "../hooks/useFetching";
 import { getPageCount } from "../utils/pages";
 import Pagination from "../components/UI/Pagination/MyPagination";
+import { useObserver } from "../hooks/useObservert";
 
 export interface Post {
   userId?: number
@@ -37,14 +38,18 @@ function Posts() {
 
   const [page, setPage] = useState<number>(1);
 
+  const lastElement = useRef<HTMLDivElement>(null)
+
   const [fetchPosts, isPostsLoading, postError] = useFetching(async (limit, page) => {
     const response = await PostService.getAll(limit, page);
-    setPosts(response.data);
+    setPosts([...posts, ...response.data]);
     const totalCount = response.headers["x-total-count"];
     setTotalPages(getPageCount(totalCount, limit));
   });
 
-    
+  useObserver(lastElement, page < totalPages, isPostsLoading, () => {
+    setPage(page + 1);
+})
   useEffect(() => {
     fetchPosts(limit, page)
 }, [page, limit])
@@ -74,11 +79,13 @@ function Posts() {
       {postError &&
       <h1 style={{display: 'flex', justifyContent: 'center', marginTop: 30, marginBottom:30}}>Fehler{postError}</h1>
       }
-      {isPostsLoading?<div style={{display: 'flex', justifyContent: 'center', marginTop: 50}}><Loader/></div>:<PostList
+      <PostList
         remove={removePost}
         posts={sortedAndSearchedPosts}
         title="Beiträge"
-      />}
+      />
+      <div ref={lastElement} style={{height: 20, visibility: "hidden"}}/>
+      {isPostsLoading&&<div style={{display: 'flex', justifyContent: 'center', marginTop: 50}}><Loader/></div>}
       <Pagination
                 page={page}
                 changePage={changePage}
