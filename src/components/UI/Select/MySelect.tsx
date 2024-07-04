@@ -1,12 +1,12 @@
 interface Option {
-  value: string;
+  value: string|number;
   name: string;
 }
 
 interface MySelectProps {
   options: Option[];
   defaultValue: string;
-  value: string;
+  value: string|number;
   onChange: (value: string) => void;
 }
 

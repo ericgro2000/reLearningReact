@@ -12,6 +12,7 @@ import { useFetching } from "../hooks/useFetching";
 import { getPageCount } from "../utils/pages";
 import Pagination from "../components/UI/Pagination/MyPagination";
 import { useObserver } from "../hooks/useObservert";
+import MySelect from "../components/UI/Select/MySelect";
 
 export interface Post {
   userId?: number
@@ -34,7 +35,7 @@ function Posts() {
 
   const [totalPages, setTotalPages] = useState<number>(0);
 
-  const [limit, setLimit] = useState<number>(10);
+  const [limit, setLimit] = useState<number|string>(10);
 
   const [page, setPage] = useState<number>(1);
 
@@ -76,6 +77,17 @@ function Posts() {
       </MyModal>
       <hr style={{ margin: "15px 0" }} />
       <PostFilter filter={filter} setFilter={setFilter} />
+      <MySelect
+                value={limit}
+                onChange={value => setLimit(value)}
+                defaultValue="Anzahl der Elemente pro Seite"
+                options={[
+                    {value: 5, name: '5'},
+                    {value: 10, name: '10'},
+                    {value: 25, name: '25'},
+                    {value: -1, name: 'Alle anzeigen'},
+                ]}
+            />
       {postError &&
       <h1 style={{display: 'flex', justifyContent: 'center', marginTop: 30, marginBottom:30}}>Fehler{postError}</h1>
       }
