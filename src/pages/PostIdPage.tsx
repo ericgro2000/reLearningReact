@@ -37,7 +37,6 @@ useEffect(() => {
            <h1>Sie haben den Beitrag {isLoading ? `mit der ID ${params.id}` : ""} geöffnet.</h1>
             {isLoading
                 ? <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><MyLoader/></div>
-                // let us do not remember that there was any previous comments here before that comment(i was really tired and didnt think the problem throught)
                 :  <div>{post?.id}. {post?.title}</div>
             }
             <h1>
